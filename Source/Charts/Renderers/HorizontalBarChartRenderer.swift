@@ -404,8 +404,7 @@ open class HorizontalBarChartRenderer: BarChartRenderer
                             drawValue(
                                 context: context,
                                 value: valueText,
-                                xPos: (rect.origin.x + rect.size.width)
-                                    + (val >= 0.0 ? posOffset : negOffset),
+                                xPos: 30,
                                 yPos: y + yOffset,
                                 font: valueFont,
                                 align: textAlign,
