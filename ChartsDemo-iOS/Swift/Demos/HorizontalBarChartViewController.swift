@@ -44,7 +44,7 @@ class HorizontalBarChartViewController: DemoBaseViewController {
         chartView.drawValueAboveBarEnabled = true
         
         chartView.maxVisibleCount = 60
-        
+        chartView.barCornerRadius = 3
         let xAxis = chartView.xAxis
         xAxis.labelPosition = .bottom
         xAxis.labelFont = .systemFont(ofSize: 10)
