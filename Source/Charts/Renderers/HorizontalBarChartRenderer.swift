@@ -28,7 +28,10 @@ open class HorizontalBarChartRenderer: BarChartRenderer
     {
         super.init(dataProvider: dataProvider, animator: animator, viewPortHandler: viewPortHandler)
     }
-    
+    open var isValueStaticXEnabled = false
+    open var valueStaticXOffset: CGFloat = 0.0 {
+        didSet { isValueStaticXEnabled = true }
+    }
     // [CGRect] per dataset
     private var _buffers = [Buffer]()
     
@@ -375,9 +378,11 @@ open class HorizontalBarChartRenderer: BarChartRenderer
                             break
                         }
                         
-                        if !viewPortHandler.isInBoundsX(rect.origin.x)
-                        {
-                            continue
+                        if !isValueStaticXEnabled {
+                            if !viewPortHandler.isInBoundsX(rect.origin.x)
+                            {
+                                continue
+                            }
                         }
                         
                         if !viewPortHandler.isInBoundsBottom(rect.origin.y)
@@ -405,10 +410,12 @@ open class HorizontalBarChartRenderer: BarChartRenderer
                         
                         if dataSet.isDrawValuesEnabled
                         {
+                            let xPos = isValueStaticXEnabled ? valueStaticXOffset :
+                            ((rect.origin.x + rect.size.width) + (val >= 0.0 ? posOffset : negOffset))
                             drawValue(
                                 context: context,
                                 value: valueText,
-                                xPos: 30,
+                                xPos: xPos,
                                 yPos: y + yOffset,
                                 font: valueFont,
                                 align: textAlign,

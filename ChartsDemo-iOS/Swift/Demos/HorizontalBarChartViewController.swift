@@ -37,7 +37,8 @@ class HorizontalBarChartViewController: DemoBaseViewController {
                         .toggleBarBorders]
         
         self.setup(barLineChartView: chartView)
-
+        let renderer = chartView.renderer as? HorizontalBarChartRenderer
+        renderer?.valueStaticXOffset = 120
         chartView.delegate = self
         
         chartView.drawBarShadowEnabled = false
